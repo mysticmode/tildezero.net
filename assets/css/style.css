@@ -1,0 +1,108 @@
+:root {
+  --text: #222;
+  --input-bg: #f2f2f2;
+  --border: 1px solid var(--text);
+  --sans: "Noto Sans Mono", -apple-system, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  --mono: "JetBrains Mono", Menlo, Consolas, Monaco, "Liberation Mono",
+    Lucida Console, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--sans);
+  font-size: 1rem;
+  width: 48em;
+  margin: 1rem auto;
+  padding: 0 1.5rem;
+}
+
+a {
+  color: var(--text);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: block;
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+nav > a {
+  color: var(--text);
+  margin-right: 1rem;
+}
+
+nav > input {
+  background-color: var(--input-bg);
+  border: var(--border);
+  width: 24em;
+  height: 2rem;
+  border-radius: 0;
+  padding: 1rem 0.7rem;
+  font-size: inherit;
+  outline: none;
+}
+
+aside {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 2rem 0;
+}
+
+aside > span {
+  font-size: 1rem;
+  font-weight: normal;
+  color: inherit;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+main > a.post-title {
+  font-size: inherit;
+  margin-bottom: 1rem;
+}
+
+main > .title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+}
+
+main > .content > .para-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 2.2rem 0 1rem;
+}
+
+main > .content > .para-title > .ref-link {
+  text-decoration: none;
+}
+
+main > .content > .para-title > .ref-link > img {
+  width: 16px;
+  height: 16px;
+}
+
+pre {
+  background: var(--input-bg);
+  padding: 1rem;
+  margin: 1rem 0;
+}
