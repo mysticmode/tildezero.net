@@ -138,6 +138,7 @@ code {
   font-family: var(--mono);
   background: var(--code-bg);
   color: var(--accent-text);
+  word-wrap: break-word;
 }
 
 @media only screen and (max-width: 960px) {
