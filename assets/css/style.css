@@ -145,8 +145,13 @@ code {
     width: 100%;
   }
 
+  header > nav {
+    width: 80%;
+  }
+
   header > nav > input {
     display: block;
     margin-top: 1rem;
+    width: 100%;
   }
 }
