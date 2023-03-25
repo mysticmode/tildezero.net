@@ -1,6 +1,8 @@
 :root {
   --text: #222;
+  --accent-text: black;
   --input-bg: #f2f2f2;
+  --code-bg: #e7e7e7;
   --border: 1px solid var(--text);
   --sans: "Noto Sans Mono", -apple-system, system-ui, BlinkMacSystemFont,
     "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
@@ -10,9 +12,13 @@
 }
 
 * {
+  box-sizing: border-box;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -25,6 +31,10 @@ body {
 
 a {
   color: var(--text);
+}
+
+strong {
+  font-weight: 600;
 }
 
 header {
@@ -44,6 +54,15 @@ header {
 nav > a {
   color: var(--text);
   margin-right: 1rem;
+}
+
+nav > a:hover {
+  background-color: var(--input-bg);
+}
+
+nav > a.active {
+  font-weight: 600;
+  background-color: var(--input-bg);
 }
 
 nav > input {
@@ -76,8 +95,13 @@ main {
 }
 
 main > a.post-title {
+  align-self: self-start;
   font-size: inherit;
   margin-bottom: 1rem;
+}
+
+main > a.post-title:hover {
+  background-color: var(--input-bg);
 }
 
 main > .title {
@@ -102,7 +126,15 @@ main > .content > .para-title > .ref-link > img {
 }
 
 pre {
-  background: var(--input-bg);
+  font-family: var(--mono);
+  background: var(--code-bg);
   padding: 1rem;
   margin: 1rem 0;
+  color: var(--accent-text);
+}
+
+code {
+  font-family: var(--mono);
+  background: var(--code-bg);
+  color: var(--accent-text);
 }

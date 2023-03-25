@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>~0</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <title>tildezero</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,6 +18,7 @@
     <header>
       <a href="/" class="logo">~0</a>
       <nav>
+        <a href="/">Home</a>
         <a href="">About</a>
         <a href="">Contact</a>
         <input type="text" placeholder="Type here to search..." />
@@ -31,6 +33,27 @@
           This article will walk you through the installation of Arch Linux in
           detail and how to configure the minimalist i3 setup.
         </p>
+        <p>
+          When you boot into the ISO device, you will see a screen where it
+          says: <strong>Install Arch Linux</strong>. Select that and you will
+          see the boot sequence that enters into <code>root@archiso ~ #</code>.
+          The ending <code>#</code> is one of the common symbols on Bash shell
+          or sh, where:
+        </p>
+        <ul>
+          <li>
+            <code>#</code> means you are operating the system as a root user.
+          </li>
+          <li>
+            <code>$</code> means you are operating the system as a normal user.
+          </li>
+        </ul>
+        <p>
+          Here in the initial setup of Arch Linux, the root user is the one
+          who's going to setup the operating system, thus <code>#</code> is
+          used. For brevity purpose, I will be writing the commands starting
+          just with <code>#</code>.
+        </p>
         <div id="wifiConfiguration" class="para-title">
           WiFi configuration
           <a class="ref-link" href="#wifiConfiguration"
@@ -39,6 +62,107 @@
         </div>
         <p>Check for the network interface:</p>
         <pre># ip link</pre>
+        <p>
+          You will get the list of network interfaces, for example with WiFi -
+          it would be in the lines of <code>wlo1</code>. Now create and open a
+          new file at <code>/etc/wpa_supplicant/wpa_supplicant.conf</code> with
+          your editor of choice. Then type in your WiFi address and password as
+          <code>ssid</code> and <code>psk</code> respectively.
+        </p>
+        <ul>
+          <li>WiFi address is <code>ssid</code></li>
+          <li>WiFi password is <code>psk</code></li>
+        </ul>
+        <p>
+          So, the <code>wpa_supplicant.conf</code> file will be in the format
+          of:
+        </p>
+        <pre>
+network: {
+  ssid: &lt;your-wifi-address&gt;
+  psk: &lt;your-wifi-password&gt;
+}</pre
+        >
+        <p>
+          Replace the <code>&lt;your-wifi-address&gt</code> with your WiFi
+          address. For example, my WiFi address is called "mystic" and password
+          as "abcd", it will be:
+        </p>
+        <pre>
+network: {
+  ssid: "mystic",
+  psk: "abcd"
+}</pre
+        >
+        <p>
+          When you are done with this, save and close the file. Then you have to
+          say the <code>wpa_supplicant</code> command utility to point where
+          your WiFi configuration is and run it as daemon or in other words, as
+          a background process. In order to do that, you will call:
+        </p>
+        <pre>
+wpa_supplicant -B -i wlo1 -c /etc/wpa_supplicant/wpa_supplicant.conf</pre
+        >
+        <p>
+          where <code>-B</code> means background process, <code>-i</code> is
+          your WiFi interface and finally <code>-c</code> is to point out the
+          configuration file.
+        </p>
+        <p>
+          Now we need to use the DHCP client provided by Arch Linux to connect
+          to the WiFi and by default - there will be <code>dhclient</code>. So,
+          we will do:
+        </p>
+        <pre>dhclient wlo1</pre>
+        <p>
+          This might take few seconds to connect to your WiFi, if
+          <code>dhclient</code> is done, check your internet connection with:
+        </p>
+        <pre>ping archlinux.org</pre>
+        <p>The working connection will give the output similar to:</p>
+        <pre>
+64 bytes from 93.184.216.34: icmp_seq=0 ttl=56 time=11.632 ms
+64 bytes from 93.184.216.34: icmp_seq=1 ttl=56 time=11.726 ms
+64 bytes from 93.184.216.34: icmp_seq=2 ttl=56 time=10.683 ms</pre
+        >
+        <p>
+          Now do Ctrl+d in order to exit the WiFi connection check. By now, if
+          all goes well for you - the WiFi connection has been setup in order to
+          install Arch Linux!
+        </p>
+        <div id="updateSystemClock" class="para-title">
+          Update the system clock
+          <a class="ref-link" href="#updateSystemClock"
+            ><img src="/assets/img/link.svg"
+          /></a>
+        </div>
+        <p>
+          When our system enviornment connects to the internet, it will
+          automatically detect the system clock via the
+          <code>systemd-timesyncd</code> service which is enabled by default.
+        </p>
+        <p>But make sure, the system clock is appropriate by doing:</p>
+        <pre>timedatectl</pre>
+        <p>
+          This will print the system clock detail based on your timezone in the
+          lines of:
+        </p>
+        <pre>
+Local time: Thu 2017-09-21 16:08:56 CEST
+Universal time: Thu 2017-09-21 14:08:56 UTC
+RTC time: Thu 2017-09-21 14:08:56
+Time zone: Europe/Warsaw (CEST, +0200)
+System clock synchronized: yes
+NTP service: active
+RTC in local TZ: no</pre
+        >
+        <div id="partitionDisks" class="para-title">
+          Partition the disks
+          <a class="ref-link" href="#partitionDisks"
+            ><img src="/assets/img/link.svg"
+          /></a>
+        </div>
+        <p></p>
       </div>
     </main>
   </body>
